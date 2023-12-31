@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a href="#" class="navbar-brand">PHP Fundamentals: <?= $view_bag['title']; ?></a>
+            <a href="#" class="navbar-brand">PHP Fundamentals: <?= $view_bag['title'] ?> </a>
         </div>
     </nav>
 

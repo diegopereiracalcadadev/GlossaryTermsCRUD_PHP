@@ -1,11 +1,8 @@
 <?php
 
-require('functions.php');
-
-$title = "new structure index page with model";
+require('app/app.php');
 
 $view_bag = [];
-$view_bag['title'] = 'View bag title';
+$view_bag['title'] = 'Glossary List';
 
-
-view('index', $title);
+view('index', get_terms());
