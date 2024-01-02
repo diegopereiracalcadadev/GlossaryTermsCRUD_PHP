@@ -34,6 +34,15 @@ function get_data()
     return $json;
 }
 
+function set_data($arr)
+{
+    $filePath = CONFIG['data_file'];
+
+    $json = json_encode($arr);
+
+    file_put_contents($filePath, $json);
+}
+
 function search_terms($search)
 {
     $terms = get_terms();
@@ -48,4 +57,19 @@ function search_terms($search)
     });
 
     return $result;
+}
+
+function add_term($term, $definition)
+{
+    $terms = get_terms();
+
+    $arr = [
+        "term" => $term,
+        "definition" => $definition
+    ];
+
+    $newTermObj = (object) $arr;
+    $terms[] = $newTermObj;
+
+    set_data($terms);
 }

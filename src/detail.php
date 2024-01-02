@@ -17,7 +17,7 @@ if ($data == false) {
 
 $term = $data->term;
 
-// $view_bag = [];
+$view_bag = [];
 $view_bag['title'] = "Detail for $term";
 
 view('detail', $data);

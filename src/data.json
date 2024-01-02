@@ -1,10 +1,1 @@
-[
-    {
-        "term": "css",
-        "definition": "cascade style sheets"
-    },
-    {
-        "term": "js",
-        "definition": "javascript"
-    }
-]
+[{"term":"css","definition":"cascade style sheets"},{"term":"js","definition":"javascript"},{"term":"t1","definition":"a"},{"term":"t2","definition":"a"},{"term":"t3","definition":"t3"}]
