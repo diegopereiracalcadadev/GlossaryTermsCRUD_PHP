@@ -21,7 +21,7 @@ function get_term($term)
 
 function get_data()
 {
-    $fileName = 'data.json'; //CONFIG['data_file'];
+    $fileName = CONFIG['data_file'];
 
     $json = '';
 
@@ -32,4 +32,20 @@ function get_data()
     }
 
     return $json;
+}
+
+function search_terms($search)
+{
+    $terms = get_terms();
+
+    $result = array_filter($terms, function ($item) use ($search) {
+        if (
+            strpos($item->term, $search) !== false
+            || strpos($item->definition, $search) !== false
+        ) {
+            return $item;
+        }
+    });
+
+    return $result;
 }
