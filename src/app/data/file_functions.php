@@ -73,3 +73,18 @@ function add_term($term, $definition)
 
     set_data($terms);
 }
+
+function update_term($original_term, $new_term, $definition)
+{
+    $terms = get_terms();
+
+    foreach ($terms as $item) {
+        if ($item->term == $original_term) {
+            $item->term = $new_term;
+            $item->definition = $definition;
+            break;
+        }
+    }
+
+    set_data($terms);
+}
