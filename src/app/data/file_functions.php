@@ -88,3 +88,27 @@ function update_term($original_term, $new_term, $definition)
 
     set_data($terms);
 }
+
+function delete_term($term)
+{
+    // echo $term; OK
+
+    $terms = get_terms();
+    // var_dump($terms);
+    // echo count($terms); // OK
+
+
+    for ($i = 0; $i < count($terms); $i++) {
+        // var_dump($terms[$i]['term']);
+
+        if ($terms[$i]->term === $term) {
+            unset($terms[$i]);
+            break;
+        }
+    }
+
+    // todo: rebuild the array
+
+    $newTerms = array_values($terms);
+    set_data($newTerms);
+}

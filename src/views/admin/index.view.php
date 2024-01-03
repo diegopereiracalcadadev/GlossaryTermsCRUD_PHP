@@ -11,9 +11,10 @@
         <table class="table table-stripered">
             <?php foreach ($model as $item) : ?>
                 <tr>
-                    <td><a href="edit.php?key=<?= $item->term ?>">Edit</a></td>
                     <td><?= $item->term ?></td>
                     <td><?= $item->definition ?></td>
+                    <td><a href="edit.php?key=<?= $item->term ?>">Edit</a></td>
+                    <td><a href="delete.php?key=<?= $item->term ?>">Delete</a></td>
                 </tr>
 
             <?php endforeach; ?>
