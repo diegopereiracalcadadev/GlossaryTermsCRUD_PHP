@@ -17,7 +17,7 @@ if (is_get()) {
         die();
     }
 
-    $term = get_term($key);
+    $term = Data::get_term($key);
 
     if (empty($term)) {
         view("not_found");

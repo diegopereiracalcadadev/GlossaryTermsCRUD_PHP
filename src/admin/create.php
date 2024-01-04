@@ -21,4 +21,4 @@ if (is_post()) {
 $view_bag['title'] = 'Admin';
 $view_bag['heading'] = 'Create Term';
 
-view('admin/create', get_terms());
+view('admin/create', Data::get_terms());
