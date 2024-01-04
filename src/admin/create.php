@@ -1,9 +1,9 @@
 <?php
 
+session_start();
 require('../app/app.php');
 
-error_log("testando log");
-
+ensure_user_is_authenticated();
 
 if (is_post()) {
 

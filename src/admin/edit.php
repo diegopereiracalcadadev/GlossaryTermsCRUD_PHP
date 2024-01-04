@@ -1,15 +1,15 @@
 <?php
 
+session_start();
 require('../app/app.php');
 
-// error_log("testando log");
+ensure_user_is_authenticated();
 
 
 $view_bag['title'] = 'Admin';
 $view_bag['heading'] = 'Edit Term';
 
 if (is_get()) {
-    // echo ("is get!!!!!!!!");
     $key = sanitize($_REQUEST['key'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     if (empty($key)) {
@@ -24,7 +24,6 @@ if (is_get()) {
         die();
     }
 
-    // echo var_dump($term);
     view("admin/edit", $term);
 }
 
