@@ -34,7 +34,7 @@ if (is_post()) {
     if (empty($term)) {
         echo 'empty term';
     } else {
-        delete_term($term);
+        Data::delete_term($term);
         redirect("index.php");
     }
 }

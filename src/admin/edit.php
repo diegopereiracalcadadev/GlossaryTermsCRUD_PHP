@@ -36,7 +36,7 @@ if (is_post()) {
     if (empty($term) || empty($definition) || empty($original_term)) {
         echo 'ALL FIELS ARE REQUIRED';
     } else {
-        update_term($original_term, $term, $definition);
+        Data::update_term($original_term, $term, $definition);
         redirect("index.php");
     }
 }

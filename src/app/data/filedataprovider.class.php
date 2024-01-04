@@ -1,12 +1,7 @@
 <?php
 
-class FileDataProvider
+class FileDataProvider extends DataProvider
 {
-    function __construct($file_path)
-    {
-        $this->file_path = $file_path;
-    }
-
     public function get_terms()
     {
         $json = $this->get_data();
@@ -28,14 +23,12 @@ class FileDataProvider
 
     private function get_data()
     {
-        $fileName = CONFIG['data_file'];
-
         $json = '';
 
-        if (!file_exists($fileName)) {
-            file_put_contents($fileName, '');
+        if (!file_exists($this->source)) {
+            file_put_contents($this->source, '');
         } else {
-            $json = file_get_contents($fileName);
+            $json = file_get_contents($this->source);
         }
 
         return $json;
@@ -54,7 +47,7 @@ class FileDataProvider
     {
         $terms = $this->get_terms();
 
-        $result = array_filter($terms, public function ($item) use ($search) {
+        $result = array_filter($terms, function ($item) use ($search) {
             if (
                 strpos($item->term, $search) !== false
                 || strpos($item->definition, $search) !== false
