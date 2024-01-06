@@ -4,23 +4,7 @@ class MySqlDataProvider extends DataProvider
 {
     public function get_terms()
     {
-        $db = $this->connect();
-
-        if ($db == null) {
-            return [];
-        }
-
-        $query = $db->query("SELECT * FROM terms");
-        $data = $query->fetchAll(PDO::FETCH_CLASS, "GlossaryTerm");
-
-        // $result = $smt->execute();
-
-        // var_dump($result);
-
-        $query = null;
-        $db = null;
-
-        return $data;
+        return $this->query("SELECT * FROM terms", []);
     }
 
     public function get_term($id)
@@ -50,23 +34,7 @@ class MySqlDataProvider extends DataProvider
 
     public function search_terms($search)
     {
-        $db = $this->connect();
-
-        if ($db == null) {
-            return;
-        }
-
-        $smt = $db->prepare("SELECT * FROM terms WHERE term LIKE :search OR definition LIKE :search");
-        $smt->execute([
-            ':search' => '%' . $search . '%'
-        ]);
-
-        $data = $smt->fetchAll(PDO::FETCH_CLASS, 'GlossaryTerm');
-
-        $smt = null;
-        $db = null;
-
-        return $data;
+        return $this->query("SELECT * FROM terms WHERE term LIKE :search OR definition LIKE :search", [':search' => '%' . $search . '%']);
     }
 
     public function add_term($term, $definition)
@@ -93,33 +61,24 @@ class MySqlDataProvider extends DataProvider
 
     public function update_term($id, $new_term, $definition)
     {
-        $db = $this->connect();
-
-        $sql = 'UPDATE terms SET term = :term, definition = :definition WHERE id = :id';
-
-        $smt = $db->prepare($sql);
-        $smt->execute([
-            ':id' => $id,
-            ':term' => $new_term,
-            ':definition' => $definition,
-        ]);
-
-        $smt = null;
-        $db = null;
+        $this->query(
+            'UPDATE terms SET term = :term, definition = :definition WHERE id = :id',
+            [
+                ':id' => $id,
+                ':term' => $new_term,
+                ':definition' => $definition,
+            ]
+        );
     }
 
     public function delete_term($term)
     {
-        $db = $this->connect();
-
-        $sql = 'DELETE FROM terms WHERE id = :id';
-        $smt = $db->prepare($sql);
-        $smt->execute([
-            ':id' => $term
-        ]);
-
-        $smt = null;
-        $db = null;
+        $this->query(
+            'DELETE FROM terms WHERE id = :id',
+            [
+                ':id' => $term
+            ]
+        );
     }
 
     private function connect()
@@ -130,5 +89,28 @@ class MySqlDataProvider extends DataProvider
             var_dump($e);
             return null;
         }
+    }
+
+    private function query($sql, $sql_params)
+    {
+        $db = $this->connect();
+
+        if ($db == null) {
+            return [];
+        }
+
+        if (empty($sql_params)) {
+            $query = $db->query($sql);
+        } else {
+            $query = $db->prepare($sql);
+            $query->execute($sql_params);
+        }
+
+        $data = $query->fetchAll(PDO::FETCH_CLASS, "GlossaryTerm");
+
+        $query = null;
+        $db = null;
+
+        return $data;
     }
 }
