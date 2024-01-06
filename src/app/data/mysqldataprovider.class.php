@@ -50,6 +50,23 @@ class MySqlDataProvider extends DataProvider
 
     public function search_terms($search)
     {
+        $db = $this->connect();
+
+        if ($db == null) {
+            return;
+        }
+
+        $smt = $db->prepare("SELECT * FROM terms WHERE term LIKE :search OR definition LIKE :search");
+        $smt->execute([
+            ':search' => '%' . $search . '%'
+        ]);
+
+        $data = $smt->fetchAll(PDO::FETCH_CLASS, 'GlossaryTerm');
+
+        $smt = null;
+        $db = null;
+
+        return $data;
     }
 
     public function add_term($term, $definition)
