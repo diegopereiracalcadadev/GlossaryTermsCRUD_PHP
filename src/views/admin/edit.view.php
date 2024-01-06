@@ -6,7 +6,7 @@
     </div>
     <div class="row" style="margin-top: 20px">
         <form action="" method="POST">
-            <input type="hidden" name="original-term" value="<?= $model->term; ?>">
+            <input type="hidden" name="id" value="<?= $model->id; ?>">
             <div class="form-group">
                 <label for="term">Term</label>
                 <input class="form-control" type="text" id="term" name="term" value="<?= $model->term; ?>">

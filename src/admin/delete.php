@@ -10,14 +10,14 @@ $view_bag['title'] = 'Admin';
 $view_bag['heading'] = 'Delete Term';
 
 if (is_get()) {
-    $key = sanitize($_REQUEST['key'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $id = sanitize($_REQUEST['id'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    if (empty($key)) {
+    if (empty($id)) {
         view("not_found");
         die();
     }
 
-    $term = Data::get_term($key);
+    $term = Data::get_term($id);
 
     if (empty($term)) {
         view("not_found");

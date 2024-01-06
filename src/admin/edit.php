@@ -10,14 +10,14 @@ $view_bag['title'] = 'Admin';
 $view_bag['heading'] = 'Edit Term';
 
 if (is_get()) {
-    $key = sanitize($_REQUEST['key'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $id = sanitize($_REQUEST['id'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    if (empty($key)) {
+    if (empty($id)) {
         view("not_found");
         die();
     }
 
-    $term = Data::get_term($key);
+    $term = Data::get_term($id);
 
     if (empty($term)) {
         view("not_found");
@@ -29,14 +29,14 @@ if (is_get()) {
 
 if (is_post()) {
 
+    $id = sanitize(($_POST['id']));
     $term = sanitize($_POST['term']);
     $definition = sanitize($_POST['definition']);
-    $original_term = sanitize(($_POST['original-term']));
 
-    if (empty($term) || empty($definition) || empty($original_term)) {
+    if (empty($term) || empty($definition) || empty($id)) {
         echo 'ALL FIELS ARE REQUIRED';
     } else {
-        Data::update_term($original_term, $term, $definition);
+        Data::update_term($id, $term, $definition);
         redirect("index.php");
     }
 }

@@ -16,9 +16,9 @@ class Data
         return self::$ds->get_terms();
     }
 
-    static public function get_term($term)
+    static public function get_term($id)
     {
-        return self::$ds->get_term($term);
+        return self::$ds->get_term($id);
     }
 
 
@@ -34,9 +34,9 @@ class Data
     }
 
 
-    static public function update_term($original_term, $new_term, $definition)
+    static public function update_term($id, $new_term, $definition)
     {
-        return self::$ds->update_term($original_term, $new_term, $definition);
+        return self::$ds->update_term($id, $new_term, $definition);
     }
 
 

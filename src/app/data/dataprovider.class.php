@@ -13,7 +13,7 @@ class DataProvider
     {
     }
 
-    public function get_term($term)
+    public function get_term($id)
     {
     }
 
@@ -25,7 +25,7 @@ class DataProvider
     {
     }
 
-    public function update_term($original_term, $new_term, $definition)
+    public function update_term($id, $new_term, $definition)
     {
     }
 

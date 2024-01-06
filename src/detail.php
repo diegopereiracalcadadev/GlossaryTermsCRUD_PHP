@@ -2,13 +2,13 @@
 
 require('app/app.php');
 
-if (!isset($_GET['term'])) {
+if (!isset($_GET['id'])) {
     redirect("index.php");
     die();
 }
 
 
-$data = Data::get_term($_GET['term']);
+$data = Data::get_term($_GET['id']);
 
 if ($data == false) {
     view("not_found");

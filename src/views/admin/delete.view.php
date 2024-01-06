@@ -9,7 +9,7 @@
     </div>
     <div class="row" style="margin-top: 20px">
         <form action="" method="POST">
-            <input type="hidden" name="term" value="<?= $model->term; ?>">
+            <input type="hidden" name="term" value="<?= $model->id; ?>">
             <div class="form-group">
                 <input type="submit" value="Delete">
             </div>

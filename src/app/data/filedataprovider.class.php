@@ -8,12 +8,12 @@ class FileDataProvider extends DataProvider
         return json_decode($json);
     }
 
-    public function get_term($term)
+    public function get_term($id)
     {
         $terms = $this->get_terms();
 
         foreach ($terms as $item) {
-            if ($item->term == $term) {
+            if ($item->term == $id) {
                 return $item;
             }
         }
@@ -67,7 +67,7 @@ class FileDataProvider extends DataProvider
         $this->set_data($terms);
     }
 
-    public function update_term($original_term, $new_term, $definition)
+    public function update_term($id, $new_term, $definition)
     {
         $terms = $this->get_terms();
 
