@@ -20,7 +20,8 @@ class MySqlDataProvider extends DataProvider
             ':id' => $id
         ]);
 
-        $result = $smt->fetchAll(PDO::FETCH_CLASS, 'GlossaryTerm');
+        $result = $smt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "GlossaryTerm", ["id", "term", "definition"]);
+
 
         if (empty($result)) {
             return;
@@ -106,7 +107,7 @@ class MySqlDataProvider extends DataProvider
             $query->execute($sql_params);
         }
 
-        $data = $query->fetchAll(PDO::FETCH_CLASS, "GlossaryTerm");
+        $data = $query->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "GlossaryTerm", ["id", "term", "definition"]);
 
         $query = null;
         $db = null;
