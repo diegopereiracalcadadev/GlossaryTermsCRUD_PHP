@@ -61,7 +61,7 @@ class MySqlDataProvider extends DataProvider
 
     public function update_term($id, $new_term, $definition)
     {
-        $this->query(
+        $this->execute(
             'UPDATE terms SET term = :term, definition = :definition WHERE id = :id',
             [
                 ':id' => $id,
@@ -73,7 +73,7 @@ class MySqlDataProvider extends DataProvider
 
     public function delete_term($term)
     {
-        $this->query(
+        $this->execute(
             'DELETE FROM terms WHERE id = :id',
             [
                 ':id' => $term
@@ -112,5 +112,21 @@ class MySqlDataProvider extends DataProvider
         $db = null;
 
         return $data;
+    }
+
+
+    private function execute($sql, $sql_params)
+    {
+        $db = $this->connect();
+
+        if ($db == null) {
+            return [];
+        }
+
+        $query = $db->prepare($sql);
+        $query->execute($sql_params);
+
+        $query = null;
+        $db = null;
     }
 }
