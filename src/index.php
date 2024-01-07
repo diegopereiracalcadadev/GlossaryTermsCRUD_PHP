@@ -13,4 +13,7 @@ if (isset($_GET['search'])) {
     $items = Data::get_terms();
 }
 
-view('index', $items);
+view(
+    name: 'index',
+    model: $items
+);
